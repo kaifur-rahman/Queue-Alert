@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,9 @@ import logo from "../../assets/logo.png";
 const pages = ["Dashboard", "Bookings", "Blog"];
 const settings = ["Profile", "Logout"];
 
-function Appbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+function Appbar({ userAvatar, userName }) {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,6 +46,7 @@ function Appbar() {
       })
       .then((res) => {
         if (res.status == 200) {
+          localStorage.clear();
           navigate("/");
         } else {
           alert("Error in logging out please clear cookies and refresh");
@@ -55,6 +56,7 @@ function Appbar() {
         alert("Error in logging out please clear cookies and refresh");
       });
   };
+  useEffect(() => {}, [userAvatar]);
 
   return (
     <AppBar position="static" sx={{ width: "100%", height: "3.7rem" }}>
@@ -128,7 +130,11 @@ function Appbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt={userName}
+                  src={userAvatar}
+                  sx={{ width: 40, height: 40 }}
+                />
               </IconButton>
             </Tooltip>
             <Menu

@@ -23,10 +23,12 @@ export const verifyToken = async () => {
           })
           .catch((err) => {
             if (err.status == 403 || err.status == 401) {
+              localStorage.clear();
               return false;
             }
           });
       } else {
+        localStorage.clear();
         return false;
       }
     });
