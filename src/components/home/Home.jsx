@@ -1,10 +1,10 @@
+import Login from "../Login/Login";
 import Box from "@mui/material/Box";
+import logo from "../../assets/logo.png";
+import { colors } from "../../constants/colors";
 import Typography from "@mui/material/Typography";
 
 function Home() {
-  const handleSignin = () => {
-    window.location.href = "http://localhost:5000/auth/google";
-  };
   return (
     <>
       <Box
@@ -13,30 +13,38 @@ function Home() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
+          backgroundColor: colors.fadeBackground,
         }}
       >
-        <Typography
-          variant="h3"
-          gutterBottom
-          sx={{ textAlign: "center", pt: "1rem" }}
-        >
-          Queue Alert
-        </Typography>
+        <Box>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              mt: "1.5rem",
+            }}
+          >
+            <img src={logo} style={{ height: "3rem", width: "7rem" }}></img>
+          </Box>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ textAlign: "center", mt: "1rem", fontWeight: "bold" }}
+          >
+            Sign in to your account
+          </Typography>
+        </Box>
         <Box
           sx={{
             display: "flex",
             flexGrow: 1,
             justifyContent: "center",
             alignItems: "center",
+            width: "100%",
           }}
         >
-          <button
-            type="button"
-            className="login-with-google-btn"
-            onClick={handleSignin}
-          >
-            Sign in with Google
-          </button>
+          <Login />
         </Box>
       </Box>
     </>
